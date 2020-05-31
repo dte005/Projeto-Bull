@@ -5,6 +5,9 @@ import Mail from '../lib/mail';
 
 module.exports = {
     key: 'loginMail', //Nome do job
+    options:{
+        attemps: 3
+    },
     handle: async function({data}){ //O que o job irá executar
         const {user} = data;
         await Mail.sendMail({

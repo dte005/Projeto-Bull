@@ -11,10 +11,14 @@ import flash from 'connect-flash';
 import session from 'express-session';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
+import Bullboard from 'bull-board';
+import Queue from './lib/queue';
 
 global.sequelize = bdConnection();
 
 const app = express();
+
+Bullboard.setQueues(Queue.queues.map(queue=>queue.bull));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -30,6 +34,7 @@ app.use(flash())
 app.use(morgan('dev'));
 app.use('/bull', bull);
 app.use('/', login);
+app.use('/admin/queues', Bullboard.UI)
 app.use(page404);
 
 
