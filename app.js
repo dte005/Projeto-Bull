@@ -32,8 +32,8 @@ app.use(session({
 }))
 app.use(flash())
 app.use(morgan('dev'));
-app.use('/bull', bull);
-app.use('/', login);
+app.use('/', bull);
+app.use('/login', login);
 app.use('/admin/queues', Bullboard.UI)
 app.use(page404);
 

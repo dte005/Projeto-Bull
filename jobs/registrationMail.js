@@ -4,7 +4,7 @@
 import Mail from '../lib/mail';
 
 module.exports = {
-    key: 'loginMail', //Nome do job
+    key: 'registrationMail', //Nome do job
     options:{
         attemps: 3
     },
@@ -13,7 +13,7 @@ module.exports = {
         await Mail.sendMail({
             from: `Queue test <queue@teste.com>`,
             to: `${user.firstname} <${user.email}>`,
-            subject: 'Você acabou de logar em nossa plataforma',
+            subject: 'Cadastro de usuario',
             html: 'Olá, bem vindo ao nosso sistema!'
         })
     }

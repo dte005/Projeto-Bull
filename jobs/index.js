@@ -3,8 +3,10 @@
  */
 import LoginMail from './loginMail';
 import userReport from './userReport';
+import registrationMail from './registrationMail';
 
 module.exports = {
     LoginMail,
-    userReport
+    userReport,
+    registrationMail
 }
