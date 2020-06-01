@@ -13,9 +13,10 @@ import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import Bullboard from 'bull-board';
 import Queue from './lib/queue';
+import {redisConnection} from './bd/redis';
 
 global.sequelize = bdConnection();
-
+const client = redisConnection();
 const app = express();
 
 Bullboard.setQueues(Queue.queues.map(queue=>queue.bull));
@@ -24,7 +25,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 //Eu não conseguia capturar o body ate instalar esse cara
 app.use(bodyParser.urlencoded({extended:true}));
-
+app.use('/public', express.static('public'));
 app.use(session({
     secret: 'bull',
     resave: false,
@@ -37,7 +38,30 @@ app.use('/login', login);
 app.use('/admin/queues', Bullboard.UI)
 app.use(page404);
 
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 
-app.listen(process.env.PORT, ()=>{
+io.on('connection', socket=>{
+    console.log(`Socket conectado: ${socket.id}`);
+
+    client.get('chatMessages', function(err, reply){
+        socket.emit('previousMessages', JSON.parse(reply));
+    });
+    
+
+    socket.on('sendMessage', data=>{
+        let messages = [];
+        client.get('chatMessages', function(err, reply){
+            for( const msg in JSON.parse(reply)){
+                messages.push({author:reply['author'], message:reply['message']})
+            };
+        });
+        messages.push(data);
+        client.set('chatMessages', JSON.stringify(messages));
+        socket.broadcast.emit('receviedMessage', data);
+    })
+})
+
+server.listen(process.env.PORT, ()=>{
     console.log("Rodando na porta 3000.");
 })
