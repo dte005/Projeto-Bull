@@ -3,8 +3,9 @@
     <div class="row">
         <div class="col">
             <form id="chat">
-                <input class="mb-2" type="text" name="username" id="username" placeholder="digite seu usuario">
-                <div style="height: 15vh; border: 1px solid black" class="messages mb-2" id="messages"></div>
+                <%const formUsername = logado.firstname + logado.lastname%>
+                <input class="mb-2 d-none" type="text" name="username" id="username" value=<%=formUsername%> placeholder="digite seu usuario" disabled>
+                <div style="height: 15vh; border: 1px solid black;  overflow: auto;" class="messages mb-2" id="messages"></div>
                 <input type="text" name="message" id="message" placeholder="digite sua mensagem">
                 <input type="submit" class="btn btn-primary" value="enviar">
 
@@ -12,42 +13,5 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" >
-    //Cada vez que renderiza a pagina se conecta via socket
-    var socket = io('http://localhost:3000');
-
-    function renderMessage(message){
-        //console.log(message);
-        const messages = document.getElementById('messages');
-        messages.innerHTML += "<div style='margin-left:5px;'><strong>"+message.author+"</strong>: "+message.message+"</div>"
-    }
-
-    socket.on('previousMessages', function(messages){
-        messages.forEach(msg=>{
-            renderMessage(msg);
-        }) 
-    })
-
-    socket.on('receviedMessage', function(message){
-        renderMessage(message);
-    })
-
-    //Recupera o chat e verifica se existe mensagens e author
-    const chat = document.getElementById('chat');
-
-    chat.addEventListener('submit', function(event){
-        event.preventDefault();
-        const author = document.getElementById('username').value
-        const message = document.getElementById('message').value
-
-        if(author !== "" && message !== ""){
-            var messageObject = {
-                author: author,
-                message: message
-            }
-            socket.emit('sendMessage', messageObject);
-            renderMessage(messageObject);
-        }
-    })
-</script>
+<script type="text/javascript" src="/public/javascript/batepapo.js"></script>
 <%- include("components/footer")%>

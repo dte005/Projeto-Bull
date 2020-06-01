@@ -43,7 +43,7 @@ const io = require('socket.io')(server);
 
 io.on('connection', socket=>{
     console.log(`Socket conectado: ${socket.id}`);
-
+    
     client.get('chatMessages', function(err, reply){
         socket.emit('previousMessages', JSON.parse(reply));
     });
@@ -52,13 +52,16 @@ io.on('connection', socket=>{
     socket.on('sendMessage', data=>{
         let messages = [];
         client.get('chatMessages', function(err, reply){
-            for( const msg in JSON.parse(reply)){
-                messages.push({author:reply['author'], message:reply['message']})
-            };
-        });
-        messages.push(data);
-        client.set('chatMessages', JSON.stringify(messages));
-        socket.broadcast.emit('receviedMessage', data);
+            var msgParse = JSON.parse(reply);
+            if(msgParse){
+                msgParse.forEach(msg=>{
+                    messages.push(msg);
+                })
+            }
+            messages.push(data);
+            client.set('chatMessages', JSON.stringify(messages));
+            socket.broadcast.emit('receviedMessage', data);
+        });  
     })
 })
 

@@ -17,31 +17,25 @@ exports.login = (req, res)=>{
     User.findOne({where:{email: req.body.email}})
     .then(async function(user){
         if(user){
-            userInstance = user;
             if(isValidPassword(user.dataValues.password, req.body.password)){
-                //No momento esse email esta sendo enviado utilizando recursos da maquina e da aplicacao
-                //Ideal seria rodar em outro lugar para que libere recursos para aplicacao
-                // return Queue.add({user});
+                userInstance = user;
                 req.session.user = user.dataValues.id;
                 return Queue.add('loginMail',{user});
             }else{
-                req.flash('error', 'Esta senha é invalida')
-                res.redirect('/login');
+                throw "Senha incorreta";
             }
+            
         }else{
-            req.flash('error', 'Não existe esse usuário')
-            res.redirect('/login');
+            throw "Email não está correto";
         }
     })
     .then(function(sended){
         res.redirect('/');
     })
     .catch(function(error){
-        console.log(error);
-        req.flash('error', 'Houve um erro ao tentar logar')
+        req.flash('error', error);
         res.redirect('/login');
-    })
-    
+    }) 
 }
 
 exports.signup = (req, res)=>{
@@ -67,8 +61,7 @@ exports.createUser = (req, res)=>{
             req.session.user = user.dataValues.id;
             return Queue.add('loginMail',{user}); //enviando email no background
         }else{
-            req.flash('error', 'Houve um erro ao criar a conta')
-            res.redirect('/login/signup');
+            throw "Houve um erro ao criar a conta";
         }
     })
     .then(function(sended){
@@ -76,7 +69,7 @@ exports.createUser = (req, res)=>{
     })
     .catch(function(error){
         if(error){
-            req.flash('error', 'Houve um erro geral de criacao de conta')
+            req.flash('error', error)
             res.redirect('/login/signup');
         }
     })
