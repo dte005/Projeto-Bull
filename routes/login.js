@@ -9,4 +9,7 @@ router.post('/send', login);
 router.get('/signup', signup);
 router.post('/signup', validEmailToSignup, createUser);
 
+//Termos um rota param que verifica o usuario e anexa o mesmo ao request da url
+// router.param('userId', userById);
+
 module.exports = router;
