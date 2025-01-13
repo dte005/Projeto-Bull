@@ -63,8 +63,8 @@ io.on('connection', socket=>{
             socket.broadcast.emit('receviedMessage', data);
         });  
     })
-})
+});
 
 server.listen(process.env.PORT, ()=>{
     console.log("Rodando na porta 3000.");
-})
+});

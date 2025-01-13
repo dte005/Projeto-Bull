@@ -1,20 +1,29 @@
 /**
  * Arquivo de configuração do job particular
  */
-import Mail from '../lib/mail';
+import fetch from 'node-fetch';
+require("dotenv").config();
+import config from "../config/mail"
 
 module.exports = {
     key: 'loginMail', //Nome do job
     options:{
         attemps: 3
     },
-    handle: async function({data}){ //O que o job irá executar
+    handle: async function({data}){
         const {user} = data;
-        await Mail.sendMail({
-            from: `Queue test <queue@teste.com>`,
-            to: `${user.firstname} <${user.email}>`,
-            subject: 'Você acabou de logar em nossa plataforma',
-            html: 'Olá, bem vindo ao nosso sistema!'
-        })
+        config.template_params.send_to = user.email;
+        config.template_params.from = user.firstname;
+        config.template_params.title = "Você realizou login em nossa plataforma";
+        config.template_params.action = "LOGIN";
+        const headers = {
+            'Content-Type': 'application/json'
+        }
+        return await fetch(process.env.EMAILJS_URL,{method: "POST", body: JSON.stringify(config), headers})
+            .then(res=>{
+                if(res.status !== 200) {throw new Error(res.statusText)}
+                return res;
+            })
+            .catch(e=>{throw new Error(e)})
     }
 }

@@ -33,6 +33,7 @@ exports.login = (req, res)=>{
         res.redirect('/');
     })
     .catch(function(error){
+        console.log(error);
         req.flash('error', error);
         res.redirect('/login');
     }) 

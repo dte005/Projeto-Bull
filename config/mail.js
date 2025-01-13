@@ -1,8 +1,10 @@
 module.exports = {
-    host: process.env.MAIL_HOST,
-    port: process.env.MAIL_PORT,
-    auth:{
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS 
+    service_id: process.env.SERVICE_ID,
+    template_id: process.env.TEMPLATE_ID,
+    user_id: process.env.USER_ID,
+    template_params:{
+        send_to: "",
+        titulo: "",
+        msg: "",
     }
 }

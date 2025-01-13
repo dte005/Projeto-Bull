@@ -5,6 +5,6 @@ module.exports = {
     },
     handle: async function({data}){ //O que o job irá executar
         const {userInstance} = data;
-        console.log(userInstance);
+        console.log("Instância: ", userInstance);
     }
 }
