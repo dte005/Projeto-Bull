@@ -1,5 +1,3 @@
-//Para podermos usar o impor ao inves do require temos que utilizar o pacote sucrase para que todas
-//features do ES6 possam ser utilizadas
 import 'dotenv/config';
 import express from 'express';
 import bull  from "./routes/bull";

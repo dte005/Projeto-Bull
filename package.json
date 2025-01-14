@@ -10,7 +10,7 @@
     "test": "jest --config jest.config.js",
     "test:watch": "jest --watch --config jest.config.js"
   },
-  "author": "Daniel",
+  "author": "DS9",
   "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
