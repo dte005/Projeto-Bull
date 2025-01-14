@@ -1,7 +1,7 @@
 {
   "name": "proj_bull",
   "version": "1.0.0",
-  "description": "projeto para servicos background",
+  "description": "WebApp para chat em tempo real e serviços em background com Bull",
   "main": "app.js",
   "scripts": {
     "dev": "npm-run-all -p dev:*",
