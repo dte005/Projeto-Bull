@@ -1,26 +1,27 @@
 <h1> 🚀 Para que serve este repo ?</h1>
-<p>API que representa o backend de uma aplicação. Realiza interface com o banco de dados</p>
+<p>Webapp de chat messages em tempo real</p>
 
 <h3> 📋 O que ele possui ?</h3>
 <ul>
- <li>Api em typescript.</li>
- <li>Configuração para deploy no heroku e transpilação de código para javascript através do arquivo tsconfig.json</li>
- <li>Lista de pacotes básicos para configuração de ts no node</li>
+ <li>Socket.io</li>
+ <li>Node.js com controle de login</li>
+ <li>Sistemas de filas com Bull</li>
+ <li>Sistemas de filas com Redis</li>
 </ul>
 
 <h3> 📦 Para qual projeto ele foi feito ?</h3>
-<p>Foi desenvolvido para o projeto de cadastro de provas para facilitar o estudo de crianças e adolescentes.</p>
+<p>Foi desenvolvido para o projeto de cadastro e login de usuarios assim como controle de envio de jobs em background e também um chat em tempo real</p>
 
 <h3> 🛠️ Qual a estrutura do banco de dados ?</h3>
 
-<a href="https://res.cloudinary.com/dto9syixe/image/upload/v1736637257/github/provasApp/ProvasApp_isijau.pdf">desenhodb_provasapp</a>
+<a href="">tbd</a>
 
 <h3> 🛠️ O que foi usado para construir ?</h3>
 <div>
   <img src="https://github.com/devicons/devicon/blob/master/icons/nodejs/nodejs-original-wordmark.svg" title="Node.Js" alt="Nodejs" width="40" height="40"/>&nbsp;
   <img src="https://github.com/devicons/devicon/blob/master/icons/sequelize/sequelize-original-wordmark.svg" title="Sequelize" alt="Sequelize" width="40" height="40"/>&nbsp;
   <img src="https://github.com/devicons/devicon/blob/master/icons/mysql/mysql-original-wordmark.svg" title="Mysql" alt="Mysql" width="40" height="40"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/typescript/typescript-original.svg" title="React" alt="React" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/redis/redis-original-wordmark.svg"title="Redis" alt="Redis" width="40" height="40"
 </div>
 
 <h3> 🔧 Instalação</h3>
@@ -41,6 +42,11 @@ npx sequelize-cli db:migrate
 npx sequelize-cli db:seed:all
 ```
 
+Instalar o Redis e rodar o serviço
+```
+brew services start redis 
+```
+
 ✒️ Autor: @dte005
 </br>
-📄 Data: 01/12/2025
+📄 Data: 13/01/2025
