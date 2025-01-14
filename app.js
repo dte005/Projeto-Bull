@@ -19,11 +19,11 @@ const app = express();
 
 Bullboard.setQueues(Queue.queues.map(queue=>queue.bull));
 
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '/frontend/views'));
 app.set('view engine', 'ejs');
 //Eu não conseguia capturar o body ate instalar esse cara
 app.use(bodyParser.urlencoded({extended:true}));
-app.use('/public', express.static('public'));
+app.use('/frontend/javascript', express.static('frontend/javascript'));
 app.use(session({
     secret: 'bull',
     resave: false,

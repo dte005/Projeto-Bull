@@ -4,7 +4,7 @@ module.exports = {
     user_id: process.env.USER_ID,
     template_params:{
         send_to: "",
-        titulo: "",
+        title: "",
         msg: "",
     }
 }
