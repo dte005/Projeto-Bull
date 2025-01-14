@@ -47,6 +47,6 @@ Instalar o Redis e rodar o serviço
 brew services start redis 
 ```
 
-✒️ Autor: @dte005
+✒️ Autor: @dte005 / ds9
 </br>
 📄 Data: 13/01/2025
