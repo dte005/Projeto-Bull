@@ -38,8 +38,8 @@ app.use('/login', login);
 app.use('/admin/queues', Bullboard.UI)
 app.use(page404);
 
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+const server = require('http').createServer(app); //Formalizando o protocolo http
+const io = require('socket.io')(server); //Formalizando o protocolo wss (websocket)
 
 io.on('connection', socket=>{
     console.log(`Socket conectado: ${socket.id}`);
