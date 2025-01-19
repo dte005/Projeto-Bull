@@ -10,8 +10,6 @@ module.exports = (sequelize, DataTypes) => {
     username: DataTypes.STRING,
     active: DataTypes.BOOLEAN
   }, {timestamps: false});
-  User.associate = function(models) {
-    // associations can be defined here
-  };
+  User.associate = function(models) {};
   return User;
 };

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     key: 'userReport', //Nome do job
     options:{
         delay: 5000

@@ -5,7 +5,7 @@ import LoginMail from './loginMail';
 import userReport from './userReport';
 import registrationMail from './registrationMail';
 
-module.exports = {
+export default {
     LoginMail,
     userReport,
     registrationMail

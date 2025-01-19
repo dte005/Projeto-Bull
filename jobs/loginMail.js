@@ -1,11 +1,8 @@
-/**
- * Arquivo de configuração do job particular
- */
 import fetch from 'node-fetch';
-require("dotenv").config();
+import 'dotenv/config';
 import config from "../config/mail"
 
-module.exports = {
+export default {
     key: 'loginMail', //Nome do job
     options:{
         attemps: 3
