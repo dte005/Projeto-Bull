@@ -11,10 +11,10 @@ function renderMessage(message){
 socket.on('previousMessages', function(messages){
     if(messages){
         messages.forEach(msg=>{
-        renderMessage(msg);
+            renderMessage(msg);
         })
     }
-     
+
 })
 
 socket.on('receviedMessage', function(message){

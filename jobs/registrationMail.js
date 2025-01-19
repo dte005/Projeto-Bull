@@ -1,10 +1,7 @@
-/**
- * Arquivo de configuração do job particular
- */
 import config from "../config/mail";
 import fetch from "node-fetch";
 
-module.exports = {
+export default {
     key: 'registrationMail', //Nome do job
     options:{
         attemps: 3
